@@ -14,7 +14,8 @@
     <div class="main">
         <div class="container">
             <div class="header">
-                <div class="photo"></div>
+                <div class="photo">
+                </div>
                 <div class="name">
                     <div class="play-now">
                         <h5>Playing</h5>
@@ -31,13 +32,14 @@
                 </div>
             </div>
 
-            <audio id="audio" src=""></audio>
+            <audio id="audio" preload="metadata" src=""></audio>
             
             <div class="bar-process">
                 <input type="range" id="progress" class="process-change" value="0" step="1" min="0" max="100">
             </div>
             <div class="time">
-                <span class="curTime" >00:00 </span>
+                <span class="curTime" ></span>
+                <span class="sumTime" > </span>
             </div>
             <div class="btn-control">
                 <div class="btn preview">
