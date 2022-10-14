@@ -56,6 +56,12 @@ const app = {
       image: "https://i1.sndcdn.com/artworks-yukyFaBjTlbbBrn6-yjfdgg-t500x500.jpg"
     },
     {
+      name: "Như Anh Đã Thấy Em",
+      singer: "PhucXp ft. Freak D",
+      path: "https://vnno-zn-5-tf-mp3-s1-zmp3.zmdcdn.me/61667d29d3683a366379/1425106264644905741?authen=exp=1665932702~acl=/61667d29d3683a366379/*~hmac=f3ed799a1c8977ed4f9637203a9b3fbe&fs=MTY2NTmUsIC1OTkwMjg3MHx3ZWJWNnwxMDYxNTM4NjQzfDEdUngNTUdUngNi45NA&filename=Nhu-Anh-Da-Thay-Em-PhucXP-Freak-D.mp3",
+      image: "https://i.ytimg.com/vi/cPbp2iFaZRo/maxresdefault.jpg"
+    },
+    {
       name: "Ánh sao và bầu trời",
       singer: "Dick, Tofu, PC",
       path: "https://stream.nixcdn.com/NhacCuaTui1021/AnhSaoVaBauTroi-TRI-7085073.mp3?st=03rOBZW2B-L7lQ0TthMM6Q&e=1665409360&download=true",
