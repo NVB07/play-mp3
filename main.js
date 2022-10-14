@@ -1,6 +1,7 @@
 
 
 const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
 const player = $(".main");
 const heading = $(".name__song h3");
@@ -16,8 +17,6 @@ const playlist = $(".playlist");
 const app = {
   currentIndex: 0,
   isPlaying: false,
-  isRandom: false,
-  isRepeat: false,
   config: {},
   songs: [
     {
@@ -146,6 +145,14 @@ const app = {
                                 <h3 class="title">${song.name}</h3>
                                 <p class="author">${song.singer}</p>
                             </div>
+                            <div class="box" > 
+                                <div class="column"></div>
+                                <div class="column"></div>
+                                <div class="column"></div>
+                                <div class="column"></div>
+                                <div class="column"></div>
+                                <div class="column"></div>
+                            </div>
                             
                         </div>
                     `;
@@ -167,23 +174,33 @@ const app = {
     playBtn.onclick = function () {
       if (_this.isPlaying) {
         audio.pause();
+        
       } else {
         audio.play();
+        
       }
     };
 
     // Khi song được play
     // When the song is played
     audio.onplay = function () {
+      var flash = $$('.column')
       _this.isPlaying = true;
       player.classList.add("playing");
+      for (let i = 0; i < flash.length; i++) {
+        flash[i].classList.add("animations")
+      }
     };
 
     // Khi song bị pause
     // When the song is pause
     audio.onpause = function () {
+      var flash = $$('.column')
       _this.isPlaying = false;
       player.classList.remove("playing");
+      for (let i = 0; i < flash.length; i++) {
+        flash[i].classList.remove("animations")
+      }
     };
 
     // Khi tiến độ bài hát thay đổi
@@ -207,11 +224,8 @@ const app = {
     // Khi next song
     // When next song
     nextBtn.onclick = function () {
-      if (_this.isRandom) {
-        _this.playRandomSong();
-      } else {
         _this.nextSong();
-      }
+      
       audio.play();
       _this.render();
       _this.scrollToActiveSong();
@@ -220,11 +234,8 @@ const app = {
     // Khi prev song
     // When prev song
     prevBtn.onclick = function () {
-      if (_this.isRandom) {
-        _this.playRandomSong();
-      } else {
         _this.prevSong();
-      }
+      
       audio.play();
       _this.render();
       _this.scrollToActiveSong();
@@ -276,10 +287,7 @@ const app = {
     cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
     audio.src = this.currentSong.path;
   },
-  loadConfig: function () {
-    this.isRandom = this.config.isRandom;
-    this.isRepeat = this.config.isRepeat;
-  },
+  
   nextSong: function () {
     this.currentIndex++;
     if (this.currentIndex >= this.songs.length) {
@@ -304,9 +312,6 @@ const app = {
     this.loadCurrentSong();
   },
   start: function () {
-    // Gán cấu hình từ config vào ứng dụng
-    // Assign configuration from config to application
-    this.loadConfig();
 
     // Định nghĩa các thuộc tính cho object
     // Defines properties for the object
@@ -328,16 +333,17 @@ const app = {
 app.start();
 
 
-
+// set Volume bar
 let volume = document.querySelector("#volume-control");
 volume.addEventListener("change", function(e) {
 audio.volume = e.currentTarget.value / 100;
 })
 
 
-
+// thời gian phát audio
 function getTime(){
   var time = audio.currentTime;
+
 
   var timeSecons = Math.floor(time / 1);
   
@@ -350,8 +356,29 @@ function getTime(){
     if(timeSecons < 10) {
       timeSecons = "0" + timeSecons;
   }
-
+  //gán vào class củTime
   $(".curTime").innerHTML = min + ":" + timeSecons;
 }
 setInterval("getTime()",1000);
 
+
+
+// tổng thời gian file mp3
+audio.onloadedmetadata = function() {
+  var time = audio.duration;
+
+
+  var timeSecons = Math.floor(time / 1);
+  
+    var min = Math.floor(timeSecons / 60);
+    (min >= 1) ? timeSecons = timeSecons - (min*60) : min = '0';
+    (timeSecons < 1) ? sec='0' : void 0;
+    if(min < 10) {
+      min = "0" + min;
+  }
+    if(timeSecons < 10) {
+      timeSecons = "0" + timeSecons;
+  }
+  //gán vào class sumeTime
+  $(".sumTime").innerHTML = min + ":" + timeSecons;
+};
